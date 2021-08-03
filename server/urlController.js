@@ -5,16 +5,6 @@ const jsdom = require('jsdom');
 
 const { JSDOM } = jsdom;
 
-/*
-@todo
-Convert to async await
-functional programing
-error handling class - standardize
-unit tests
-prevent bad url in front end and server
-https://gist.github.com/Daniel-Hug/1415b4d027e3e9854456f4e812ea2ce1
-*/
-
 const treeWalker = (dom) => {
     const body = dom.window.document.getElementsByTagName('BODY')[0];
 
@@ -41,8 +31,6 @@ const treeWalker = (dom) => {
     );
 
     while ((n = walk.nextNode())) {
-        // console.log('n', n.textContent);
-
         const string = n.textContent;
         const strFilt = string.split(' ');
 
@@ -61,18 +49,14 @@ const treeWalker = (dom) => {
 const urlController = async (req, res, next) => {
     const { body } = req;
 
-    console.log('req', req.body);
-
-    got(body.url)
-        .then((response) => {
-            const dom = new JSDOM(response.body);
-            const textCalc = treeWalker(dom);
-            // console.log('textCalc', textCalc);
-            res.json({ urlWordCount: textCalc });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    try {
+        const gotRes = await got(body.url);
+        const dom = new JSDOM(gotRes.body);
+        const textCalc = treeWalker(dom);
+        res.json({ urlWordCount: textCalc });
+    } catch (err) {
+        res.status(400).send(err);
+    }
 };
 
 module.exports = { urlController };
