@@ -46,14 +46,38 @@ const treeWalker = (dom) => {
     return a;
 };
 
+const sortByAlphabetic = (words) =>
+    Object.keys(words)
+        .sort()
+        .reduce(function (acc, key) {
+            acc[key] = words[key];
+            return acc;
+        }, {});
+
+const sortByFrequency = (words) =>
+    Object.entries(words)
+        .sort(([, a], [, b]) => a - b)
+        .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
 const urlController = async (req, res, next) => {
-    const { body } = req;
+    const { body, query } = req;
+
+    console.log('params', query);
 
     try {
         const gotRes = await got(body.url);
         const dom = new JSDOM(gotRes.body);
         const textCalc = treeWalker(dom);
-        res.json({ urlWordCount: textCalc });
+
+        if (query.sort === 'alphabetic') {
+            const sortedRes = sortByAlphabetic(textCalc);
+            res.json({ urlWordCount: sortedRes });
+        } else if (query.sort === 'frequency') {
+            const sortedRes = sortByFrequency(textCalc);
+            res.json({ urlWordCount: sortedRes });
+        } else {
+            res.json({ urlWordCount: textCalc });
+        }
     } catch (err) {
         res.status(400).send(err);
     }

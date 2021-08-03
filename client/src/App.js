@@ -14,21 +14,30 @@ function App() {
   const [isInvalidUrl, setIsInvalidUrl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleUrlChange = async(value) => {
-    if (!validURL(value)) {
+  const handleUrlChange = async (urlValue, sortType) => {
+
+    console.log(urlValue, sortType);
+
+    if (!validURL(urlValue)) {
       setIsInvalidUrl(true)
       return;
     }
     setIsLoading(true);
 
+    const queryParams = {};
+
+    if (sortType === 'alphabetic' || sortType === 'frequency') {
+      queryParams.sort = sortType;
+    }
+
     try {
       const urlResponse = await axios.post('http://localhost:3001/api', {
-        url: value
-      })
+        url: urlValue
+      }, { params: queryParams })
 
       setUrlResHistory(prevState => {
         return [{
-          url: value,
+          url: urlValue,
           wordCount: urlResponse.data.urlWordCount
         }, ...prevState]
       });

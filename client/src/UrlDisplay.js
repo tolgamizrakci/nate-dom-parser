@@ -16,7 +16,7 @@ const UrlDisplay = ({
                     status="500"
                     title="Wrong URL format"
                     subTitle="Please enter a correct URL"
-                    extra={<Button type="primary" onClick={setIsInvalidUrl(false)}>Close</Button>}
+                    extra={<Button type="primary" onClick={() => setIsInvalidUrl(false)}>Close</Button>}
             />  
             )}
             <Tabs defaultActiveKey="1">
