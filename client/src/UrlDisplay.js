@@ -1,15 +1,24 @@
 import React from 'react';
-import { Result, Tabs, List } from 'antd';
+import { Result, Tabs, List, Button } from 'antd';
 const { TabPane } = Tabs;
 
 
 const UrlDisplay = ({
     isInvalidUrl,
-    urlResHistory
+    urlResHistory,
+    setIsInvalidUrl
 }) => {
 
     return (
-        <div style={{padding: '50px'}}>
+        <div style={{padding: '50px', paddingBottom: '100px', paddingTop: '10px'}}>
+            {isInvalidUrl && (
+                <Result
+                    status="500"
+                    title="Wrong URL format"
+                    subTitle="Please enter a correct URL"
+                    extra={<Button type="primary" onClick={setIsInvalidUrl(false)}>Close</Button>}
+            />  
+            )}
             <Tabs defaultActiveKey="1">
                 {urlResHistory.map((urlRes, i) => {
                     return (
@@ -30,13 +39,6 @@ const UrlDisplay = ({
                     )
                 })}
             </Tabs>
-            {isInvalidUrl && (
-              <Result
-                status="500"
-                title="Wrong URL format"
-                subTitle="Please enter a correct URL"
-            />  
-            )}
         </div>
     )
 }

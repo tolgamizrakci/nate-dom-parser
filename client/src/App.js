@@ -19,15 +19,12 @@ function App() {
       setIsInvalidUrl(true)
       return;
     }
-
     setIsLoading(true);
-
-    console.log('url', value)
 
     try {
       const urlResponse = await axios.post('http://localhost:3001/api', {
         url: value
-      })      
+      })
 
       setUrlResHistory(prevState => {
         return [{
@@ -36,6 +33,7 @@ function App() {
         }, ...prevState]
       });
       setIsLoading(false);
+      setIsInvalidUrl(false);
 
     } catch (error) {
       setIsInvalidUrl(true);
@@ -52,7 +50,7 @@ function App() {
               Nate DOM Parser
             </Text>
           </Header>
-          <Layout>
+          <Layout style={{height: '100%'}}>
             <Content>
               <UrlForm 
                 handleUrlChange={handleUrlChange}
@@ -61,10 +59,11 @@ function App() {
               <UrlDisplay 
                 urlResHistory={urlResHistory}
                 isInvalidUrl={isInvalidUrl}
+                setIsInvalidUrl={setIsInvalidUrl}
               />
             </Content>
           </Layout>
-          <Footer style={{ textAlign: 'center' }}>Nate ©2021 Created by Tolga Mizrakci</Footer>
+          <Footer style={{ textAlign: 'center', position: 'fixed', bottom: 0, width: '100%' }}>Nate ©2021 Created by Tolga Mizrakci</Footer>
         </Layout>
       </header>
     </div>
