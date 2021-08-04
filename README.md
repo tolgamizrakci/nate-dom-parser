@@ -14,9 +14,19 @@
 2. Virtual DOM: React abstracts my interaction with DOM and lets me think of state changes throughout the render lifecycle
 3. Uni-directional data flow keeps things simple, although it doesn't scale well.
 
-## Distributed System Design & Improvements
+## Thoughts on Distributed System Design & Improvements
 
+![alt text](https://github.com/tolgamizrakci/nate-dom-parser/sd.jpeg?raw=true)
 
+1. URL frontier: To store the list of URLs to download and also prioritize which URLs should be crawled first.
+2. HTML Fetcher: To retrieve a web page from the server.
+3. Extractor: To extract links from HTML documents.
+4. Duplicate Eliminator: To make sure the same content is not extracted twice unintentionally.
+5. Datastore: To store retrieved pages, URLs, and other metadata.
+
+Let’s assume our crawler is running on one server and all the crawling is done by multiple working threads where each working thread performs all the steps needed to download and process a document in a loop. Java may be more appropriate server side choice.
+
+The first step of this loop is to remove an absolute URL from the shared URL frontier for downloading. An absolute URL begins with a scheme (e.g., “HTTP”) which identifies the network protocol that should be used to download it. We can implement these protocols in a modular way for extensibility, so that later if our crawler needs to support more protocols, it can be easily done. Based on the URL’s scheme, the worker calls the appropriate protocol module to download the document. After downloading, the document is placed into a Document Input Stream (DIS). Putting documents into DIS will enable other modules to re-read the document multiple times.
 
 
 ## Running app
