@@ -9,18 +9,12 @@ window.matchMedia = (query) => ({
   matches: false,
   media: query,
   onchange: null,
-  addListener: jest.fn(), // deprecated
-  removeListener: jest.fn(), // deprecated
+  addListener: jest.fn(),
+  removeListener: jest.fn(),
   addEventListener: jest.fn(),
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
 })
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Nate DOM Parser/i);
-  expect(linkElement).toBeInTheDocument();
-});
 
 afterEach(() => {
   axios.post.mockClear();
@@ -32,7 +26,15 @@ function mockCall() {
   });
 }
 
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/Nate DOM Parser/i);
+  expect(linkElement).toBeInTheDocument();
+});
 
+/*
+  Tests base case scenario for changing input, clicking search and displaying results
+*/
 test("render word count from url", async () => {
   const { getAllByTestId, getByPlaceholderText, getByText } = render(<App />);
 

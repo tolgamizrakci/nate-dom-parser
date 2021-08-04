@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Welcome to Nate DOM Parser
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack & Rationale
 
-## Available Scripts
+- Node.js / Express server
+1. Node enables to quickly develop an MVP.
+2. Node is single-threaded and has an event-driven architecture to process multiple concurrent requests efficiently without clogging the RAM. 
+3. Node scales vertically and horizontally.
+4. Express makes Node.js development fast and easy - easy to configure and customize.
+5. Express makes it easy to connect with databases such as MongoDB, Redis, MySQL
 
-In the project directory, you can run:
+- React front-end (CRA)
+1. Reusability / components - which are essentially code snippets that reflect part of a user interface that can repeated across different routes. saves time, and creates consistency which allows the developers to focus on more important functions and business logic.
+2. Virtual DOM: React abstracts my interaction with DOM and lets me think of state changes throughout the render lifecycle
+3. Uni-directional data flow keeps things simple, although it doesn't scale well.
 
-### `yarn start`
+## Distributed System Design & Improvements
 
-Runs the app in the development mode.\
+
+
+
+## Running app
+
+Inside root directory:
+### `npm i & npm start`
+
+Inside /client directory:
+### `npm i & npm start`
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+To run tests for server:
+### `npm run test-dev`
+or for coverage:
+### `npm run test-coverage`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run tests for client (make sure you're inside the /client directory):
+### `npm run test`
+or for coverage:
+### `npm run test-coverage`
 
-### `yarn build`
+## Docker build & run
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Inside root directory:
+### `docker build . -t <your username>/nate-dom-parser-server:<version>`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `docker run -p 3001:3001 -d <your username>/nate-dom-parser-server:<version>`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Inside /client directory:
+### `docker build . -t <your username>/nate-dom-parser-client:<version>`
 
-### `yarn eject`
+### `docker run -p 8080:3000 -d <your username>/nate-dom-parser-client:<version>`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

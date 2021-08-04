@@ -1,10 +1,12 @@
 /* eslint-disable no-cond-assign */
-/* eslint-disable no-console */
 const got = require('got');
 const jsdom = require('jsdom');
 
 const { JSDOM } = jsdom;
 
+/*
+  Traverses the DOM, extracts the text elements and records count in a hashmap
+*/
 const treeWalker = (dom) => {
     const body = dom.window.document.getElementsByTagName('BODY')[0];
 
@@ -59,10 +61,11 @@ const sortByFrequency = (words) =>
         .sort(([, a], [, b]) => a - b)
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 
+/*
+  URL search input and sort radio group
+*/
 const urlController = async (req, res, next) => {
     const { body, query } = req;
-
-    console.log('params', query);
 
     try {
         const gotRes = await got(body.url);

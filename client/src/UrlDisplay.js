@@ -2,7 +2,9 @@ import React from 'react';
 import { Result, Tabs, List, Button } from 'antd';
 const { TabPane } = Tabs;
 
-
+/*
+  Tabs to display the result of the URL search response
+*/
 const UrlDisplay = ({
     isInvalidUrl,
     urlResHistory,

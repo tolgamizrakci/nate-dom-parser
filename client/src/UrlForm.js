@@ -1,8 +1,10 @@
-/* eslint-disable default-case */
 import React, { useState } from 'react';
 import { Input, Space, Spin, Radio } from 'antd';
 const { Search } = Input;
 
+/*
+  URL search input and sort radio group
+*/
 const UrlForm = ({
     handleUrlChange,
     isLoading

@@ -14,6 +14,9 @@ function App() {
   const [isInvalidUrl, setIsInvalidUrl] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  /*
+    Makes request to the server to search word count for URL DOM
+  */
   const handleUrlChange = async (urlValue, sortType) => {
 
     console.log(urlValue, sortType);
@@ -38,7 +41,7 @@ function App() {
       setUrlResHistory(prevState => {
         return [{
           url: urlValue,
-          wordCount: urlResponse.data.urlWordCount
+          wordCount: urlResponse?.data?.urlWordCount
         }, ...prevState]
       });
       setIsLoading(false);
