@@ -16,7 +16,7 @@
 
 ## Thoughts on Distributed System Design & Improvements
 
-![alt text](https://github.com/tolgamizrakci/nate-dom-parser/sd.jpeg?raw=true)
+![alt text](https://github.com/tolgamizrakci/nate-dom-parser/blob/main/sd.jpeg)
 
 1. URL frontier: To store the list of URLs to download and also prioritize which URLs should be crawled first.
 2. HTML Fetcher: To retrieve a web page from the server.
