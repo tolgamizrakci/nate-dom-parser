@@ -26,7 +26,14 @@
 
 I imagine that the crawler can run on one server and all the crawling is done by multiple working threads where each working thread performs all the steps needed to download and process a document in a loop. For this, Java may be more appropriate server side choice.
 
-This is a quick diagram and some initial thoughts. I'd be happy to think about it further.
+The URL frontier is the data structure that contains all the URLs that remain to be downloaded. We can crawl by performing a breadth-first traversal by using a FIFO queue.
+
+Since we’ll be having a huge list of URLs to crawl, we can distribute our URL frontier into multiple servers. Each server can have multiple worker threads performing the crawling tasks. A hash function can map each URL to a server. More thoughts on a distributed URL frontier:
+
+- The crawler should not overload a server by downloading a lot of pages.
+- We should not have multiple machines connecting a web server.
+- The crawler can have a collection of distinct FIFO sub-queues on each server. Each thread can have its separate sub-queue, from which it URLs are removed. When a new URL needs to be added, the FIFO sub-queue in which it is placed will be determined by the URL’s hostname. The hash function can map each hostname to a thread number. 
+- At most, one worker thread will download documents from a given Web server and won't overload a Web server.
 
 ## Running app
 
