@@ -19,8 +19,6 @@ function App() {
   */
   const handleUrlChange = async (urlValue, sortType) => {
 
-    console.log(urlValue, sortType);
-
     if (!validURL(urlValue)) {
       setIsInvalidUrl(true)
       return;

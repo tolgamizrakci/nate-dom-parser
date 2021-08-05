@@ -40,7 +40,7 @@ test("render word count from url", async () => {
 
   mockCall();
 
-  const searchInput = getByPlaceholderText('input search text');
+  const searchInput = getByPlaceholderText('Search URL');
 
   fireEvent.change(searchInput, { target: { value: 'http://www.paulgraham.com/index.html' } })
 
